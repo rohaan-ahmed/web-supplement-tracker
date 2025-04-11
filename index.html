@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Supplement and Medicine Tracking</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1 id="page-title">Easy Supplement and Medicine Tracking</h1>
+        <div class="input-section">
+            <input type="text" id="supplement-name" placeholder="Supplement name">
+            <input type="number" id="supplement-dosage" placeholder="Dosage">
+            <select id="supplement-unit">
+                <option value="mg">mg</option>
+                <option value="g">g</option>
+                <option value="ml">ml</option>
+                <option value="capsule">capsule</option>
+                <option value="tablet">tablet</option>
+                <option value="IU">IU</option>
+            </select>
+            <select id="supplement-time-block">
+                <option value="Before Breakfast">Before Breakfast</option>
+                <option value="After Breakfast">After Breakfast</option>
+                <option value="Before Lunch">Before Lunch</option>
+                <option value="After Lunch">After Lunch</option>
+                <option value="Before Dinner">Before Dinner</option>
+                <option value="After Dinner">After Dinner</option>
+            </select>
+            <button id="add-dose">Add</button>
+        </div>
+        <table id="supplement-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Dosage</th>
+                    <th>Time Block</th>
+                    <th>Taken</th>
+                    <th></th> <!-- Empty header for actions -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Supplement items will be added here -->
+            </tbody>
+        </table>
+        <div class="button-group">
+            <button id="delete-table">Delete Table</button>
+            <button id="download-table">Download Table</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

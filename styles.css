@@ -117,8 +117,8 @@ td img:hover {
 }
 
 .disclaimer {
-    margin-top: 20px;
-    font-size: 0.8em;
+    margin-top: 40px; /* Add more space above the disclaimer */
+    font-size: 0.7em; /* Make the font smaller */
     color: #888;
     text-align: center;
 }

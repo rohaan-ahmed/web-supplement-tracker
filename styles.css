@@ -115,3 +115,10 @@ td img:hover {
 #delete-table:hover, #download-table:hover {
     background-color: #5aa9a3;
 }
+
+.disclaimer {
+    margin-top: 20px;
+    font-size: 0.8em;
+    color: #888;
+    text-align: center;
+}

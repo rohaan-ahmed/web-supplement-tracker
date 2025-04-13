@@ -191,11 +191,53 @@ document.getElementById('delete-table').addEventListener('click', function() {
 
 document.getElementById('download-table').addEventListener('click', function() {
     const container = document.querySelector('.container');
-    html2canvas(container).then(canvas => {
+    
+    // Configuration options for html2canvas
+    const options = {
+        backgroundColor: '#2d2d2d', // Explicitly set background color
+        useCORS: true, // Enable CORS for images
+        scale: 2, // Improve quality
+        logging: false,
+        onclone: function(clonedDoc) {
+            // Ensure all styles are computed and applied in the cloned document
+            const clonedContainer = clonedDoc.querySelector('.container');
+            const computedStyle = window.getComputedStyle(container);
+            
+            // Apply computed styles directly
+            clonedContainer.style.backgroundColor = computedStyle.backgroundColor;
+            
+            // Force all CSS variables to be computed values
+            const root = clonedDoc.documentElement;
+            const originalRoot = document.documentElement;
+            const rootStyle = window.getComputedStyle(originalRoot);
+            
+            root.style.setProperty('--accent-color', rootStyle.getPropertyValue('--accent-color'));
+            root.style.setProperty('--accent-color-rgb', rootStyle.getPropertyValue('--accent-color-rgb'));
+            
+            // Ensure all table cells have their background colors
+            const cells = clonedDoc.querySelectorAll('td, th');
+            cells.forEach(cell => {
+                const originalCell = document.querySelector(`#${cell.id}`) || cell;
+                const cellStyle = window.getComputedStyle(originalCell);
+                cell.style.backgroundColor = cellStyle.backgroundColor;
+            });
+        }
+    };
+
+    html2canvas(container, options).then(canvas => {
+        // Improve image quality
+        const context = canvas.getContext('2d');
+        context.imageSmoothingEnabled = true;
+        context.imageSmoothingQuality = 'high';
+        
+        // Create download link
         const link = document.createElement('a');
-        link.href = canvas.toDataURL();
+        link.href = canvas.toDataURL('image/png', 1.0); // Use maximum quality
         link.download = 'supplement_table.png';
         link.click();
+    }).catch(error => {
+        console.error('Error generating image:', error);
+        alert('There was an error generating the image. Please try again.');
     });
 });
 
@@ -214,7 +256,7 @@ document.getElementById('upload-csv').addEventListener('change', function(e) {
                 if (rows[i].trim() === '') continue;
                 
                 const columns = rows[i].split(',').map(col => col.trim());
-                if (columns.length >= 3) {  // Only need first 3 columns now
+                if (columns.length >= 3) {
                     const row = document.createElement('tr');
                     row.setAttribute('data-time-block', columns[2]);
                     

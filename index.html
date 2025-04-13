@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Easy Supplement and Medicine Tracking</title>
+    <title>Supplement Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <h1 id="page-title">Easy Supplement and Medicine Tracking</h1>
-        <div class="input-section">
-            <input type="text" id="supplement-name" placeholder="Supplement name">
-            <input type="number" id="supplement-dosage" placeholder="Dosage">
+        <h1>Medicine and Supplement Tracker</h1>
+        
+        <div class="input-group">
+            <input type="text" id="supplement-name" placeholder="Supplement Name" list="supplement-list">
+            <datalist id="supplement-list"></datalist>
+            <input type="number" id="supplement-dosage" placeholder="Dosage" min="0" step="0.5">
             <select id="supplement-unit">
                 <option value="mg">mg</option>
                 <option value="g">g</option>
-                <option value="ml">ml</option>
-                <option value="capsule">capsule</option>
-                <option value="tablet">tablet</option>
+                <option value="mcg">mcg</option>
                 <option value="IU">IU</option>
+                <option value="tablet">tablet</option>
+                <option value="capsule">capsule</option>
+                <option value="ml">ml</option>
+				<option value="dose">dose</option>
+                <option value="injection">injection</option>
             </select>
             <select id="supplement-time-block">
                 <option value="Before Breakfast">Before Breakfast</option>
@@ -29,28 +35,33 @@
                 <option value="Before Dinner">Before Dinner</option>
                 <option value="After Dinner">After Dinner</option>
             </select>
-            <button id="add-dose">Add</button>
+            <button id="add-dose" class="action-button">Add Dose</button>
         </div>
+
         <table id="supplement-table">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>Supplement</th>
                     <th>Dosage</th>
                     <th>Time Block</th>
-                    <th>Taken</th>
-                    <th></th> <!-- Empty header for actions -->
+                    <th id="today-date">Today</th>
+                    <th id="yesterday-date">Yesterday</th>
+                    <th id="day-before-date">Day Before</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Supplement items will be added here -->
-            </tbody>
+            <tbody></tbody>
         </table>
+
         <div class="button-group">
-            <button id="delete-table">Delete Table</button>
-            <button id="download-table">Download Table</button>
+            <button id="delete-table" class="action-button">Delete Table</button>
+            <button id="download-table" class="action-button">Download Table as PNG</button>
+            <label for="upload-csv" class="action-button">Upload New Table from CSV</label>
+            <input type="file" id="upload-csv" accept=".csv" style="display: none;">
         </div>
+
         <div class="disclaimer">
-            Disclaimer: I generated this webpage as a fun exercise to track supplements. This is not a medically approved tracker, and you should use common sense when using it.
+            <p>Disclaimer: This tracker is for personal use only. Always consult with a healthcare professional before starting any supplement regimen.</p>
         </div>
     </div>
     <script src="script.js"></script>
